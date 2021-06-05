@@ -1,3 +1,4 @@
+import profilePic from '../images/profile-image.jpg'
 import PopupWithForm from './PopupWithForm.js'
 import App from './App.js'
 function Main(props) {
@@ -20,7 +21,7 @@ function Main(props) {
         <>
             <section className="profile">
                 <div className="profile__avatar">
-                    <img className="profile__avatar profile__avatar_image" src="" alt="Фото профиля" />
+                    <img className="profile__avatar profile__avatar_image" src={profilePic} alt="Фото профиля" />
                     <button className="button profile__avatar profile__avatar_button" onClick={handleEditAvatarClick}></button>
                 </div>
                 <div className="profile__info">
@@ -38,7 +39,7 @@ function Main(props) {
             <template className="element-template">
                 <article className="element">
                     <button type="button" className="button element__delete-button"></button>
-                    <img className="element__photo" src="<%=require('./images/Горд.jpg')%>" alt="Фото" />
+                    <img className="element__photo" src="" alt="Фото" />
                     <div className="element__name-block">
                         <h2 className="element__name"></h2>
                         <div className="element__likes">
