@@ -7,9 +7,9 @@ function Main(props) {
     function handleEditAvatarClick() {
         document.querySelector('.popup_edit-avatar').classList.add('popup_opened')
     }
-    // function handleAddPlaceClick() {
-    //     document.querySelector('.popup_photo').classList.add('popup_opened')
-    // }
+    function handleAddPlaceClick() {
+        document.querySelector('.popup_photo').classList.add('popup_opened')
+    }
 
     // const handleAddPlaceClick =() => {
     //     setIsAddPlacePopupOpen(true)
@@ -28,7 +28,7 @@ function Main(props) {
                     <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={handleEditProfileClick}></button>
                     <p className="profile__description">Исследователь океана</p>
                 </div>
-                <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={props.onAddPlace}></button>
+                <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={handleAddPlaceClick}></button>
             </section>
 
             <section className="elements">
@@ -55,10 +55,10 @@ function Main(props) {
                 children={
                     <>
                         <input type="text" className="popup__field popup__field_type_name" placeholder="Имя" name="name" id="name"
-                            value="" minLength="2" maxLength="40" required />
+                            value="" minLength="2" maxLength="40" required readOnly={true} />
                         <span id="name-error" className="popup__error"></span>
                         <input type="text" className="popup__field popup__field_type_description" placeholder="Вид деятельности"
-                            name="description" id="description" value="" minLength="2" maxLength="200" required />
+                            name="description" id="description" value="" minLength="2" maxLength="200" required readOnly={true} />
                         <span id="description-error" className="popup__error"></span>
                     </>}
                 button='Сохранить'
@@ -71,10 +71,10 @@ function Main(props) {
                 children={
                     <>
                         <input type="text" className="popup__field popup__field_type_place" placeholder="Название" name="place"
-                            id="place" value="" minLength="2" maxLength="30" required />
+                            id="place" value="" minLength="2" maxLength="30" required readOnly={true} />
                         <span id="place-error" className="popup__error"></span>
                         <input type="url" className="popup__field popup__field_type_photo" name="imageLink" id="image" value=""
-                            placeholder="Ссылка на картинку" required />
+                            placeholder="Ссылка на картинку" required readOnly={true} />
                         <span id="image-error" className="popup__error"></span>
                     </>}
                 button='Создать'
@@ -87,7 +87,7 @@ function Main(props) {
                 children={
                     <>
                         <input type="url" className="popup__field popup__field_type_photo" name="imageLink" id="image-avatar" value=""
-                            placeholder="Ссылка на картинку" required />
+                            placeholder="Ссылка на картинку" required readOnly={true} />
                         <span id="image-avatar-error" className="popup__error"></span>
                     </>}
                 button='Сохранить'
