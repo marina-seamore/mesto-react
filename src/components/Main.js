@@ -2,34 +2,20 @@ import profilePic from '../images/profile-image.jpg'
 import PopupWithForm from './PopupWithForm.js'
 import App from './App.js'
 function Main(props) {
-    function handleEditProfileClick() {
-        document.querySelector('.popup_profile').classList.add('popup_opened')
-    }
-    function handleEditAvatarClick() {
-        document.querySelector('.popup_edit-avatar').classList.add('popup_opened')
-    }
-    function handleAddPlaceClick() {
-        document.querySelector('.popup_photo').classList.add('popup_opened')
-    }
-
-    // const handleAddPlaceClick =() => {
-    //     setIsAddPlacePopupOpen(true)
-    // }
-    // onAddPlace={handleAddPlaceClick}
 
     return (
         <>
             <section className="profile">
                 <div className="profile__avatar">
                     <img className="profile__avatar profile__avatar_image" src={profilePic} alt="Фото профиля" />
-                    <button className="button profile__avatar profile__avatar_button" onClick={handleEditAvatarClick}></button>
+                    <button className="button profile__avatar profile__avatar_button" onClick={props.onEditAvatar}></button>
                 </div>
                 <div className="profile__info">
                     <h1 className="profile__name">Жак-Ив-Кусто</h1>
-                    <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={handleEditProfileClick}></button>
+                    <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={props.onEditProfile}></button>
                     <p className="profile__description">Исследователь океана</p>
                 </div>
-                <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={handleAddPlaceClick}></button>
+                <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={props.onAddPlace}></button>
             </section>
 
             <section className="elements">

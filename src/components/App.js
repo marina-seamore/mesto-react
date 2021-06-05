@@ -6,19 +6,27 @@ import PopupWithForm from './PopupWithForm'
 
 function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    // const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    // const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false); 
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false); 
 
-    const handleAddPlaceClick =() => {
-        setIsAddPlacePopupOpen(true)
+    function handleEditProfileClick() {
+        document.querySelector('.popup_profile').classList.add('popup_opened')
+    }
+    function handleEditAvatarClick() {
+        document.querySelector('.popup_edit-avatar').classList.add('popup_opened')
+    }
+    function handleAddPlaceClick() {
+        document.querySelector('.popup_photo').classList.add('popup_opened')
     }
 
     return (
         <div className="page">
             <Header />
             <Main
-            onAddPlace={handleAddPlaceClick}
-             />
+                onEditProfile={handleEditProfileClick}
+                onEditAvatar={handleEditAvatarClick}
+                onAddPlace={handleAddPlaceClick}
+            />
             <Footer />
         </div>
     );
