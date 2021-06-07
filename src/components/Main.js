@@ -1,6 +1,6 @@
 import profilePic from '../images/profile-image.jpg'
 import PopupWithForm from './PopupWithForm.js'
-import App from './App.js'
+
 function Main(props) {
 
     return (
@@ -49,7 +49,7 @@ function Main(props) {
                         <span id="description-error" className="popup__error"></span>
                     </>}
                 button='Сохранить'
-                // isOpen={isOpen}
+                isOpen={props.isEditProfilePopupOpen}
             />
 
             <PopupWithForm
@@ -65,7 +65,7 @@ function Main(props) {
                         <span id="image-error" className="popup__error"></span>
                     </>}
                 button='Создать'
-                // isOpen={isOpen}
+                isOpen={props.isEditAvatarPopupOpen}
             />
 
             <PopupWithForm
@@ -78,6 +78,7 @@ function Main(props) {
                         <span id="image-avatar-error" className="popup__error"></span>
                     </>}
                 button='Сохранить'
+                isOpen={props.isAddPlacePopupOpen}
             />
 
             <PopupWithForm

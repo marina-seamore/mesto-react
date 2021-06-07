@@ -2,21 +2,20 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm'
 
 function App() {
-    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false); 
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
     function handleEditProfileClick() {
-        document.querySelector('.popup_profile').classList.add('popup_opened')
+        setIsEditProfilePopupOpen(true);
     }
     function handleEditAvatarClick() {
-        document.querySelector('.popup_edit-avatar').classList.add('popup_opened')
+        setIsEditAvatarPopupOpen(true);
     }
     function handleAddPlaceClick() {
-        document.querySelector('.popup_photo').classList.add('popup_opened')
+        setIsAddPlacePopupOpen(true);
     }
 
     return (
@@ -26,6 +25,9 @@ function App() {
                 onEditProfile={handleEditProfileClick}
                 onEditAvatar={handleEditAvatarClick}
                 onAddPlace={handleAddPlaceClick}
+                isEditProfilePopupOpen={isEditProfilePopupOpen}
+                isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+                isAddPlacePopupOpen={isAddPlacePopupOpen}
             />
             <Footer />
         </div>
