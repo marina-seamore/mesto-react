@@ -8,6 +8,12 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+    }
+
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
     }
@@ -28,6 +34,7 @@ function App() {
                 isEditProfilePopupOpen={isEditProfilePopupOpen}
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 isAddPlacePopupOpen={isAddPlacePopupOpen}
+                onClose={closeAllPopups}
             />
             <Footer />
         </div>

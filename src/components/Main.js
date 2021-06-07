@@ -50,6 +50,7 @@ function Main(props) {
                     </>}
                 button='Сохранить'
                 isOpen={props.isEditProfilePopupOpen}
+                onClose={props.onClose}
             />
 
             <PopupWithForm
@@ -65,7 +66,8 @@ function Main(props) {
                         <span id="image-error" className="popup__error"></span>
                     </>}
                 button='Создать'
-                isOpen={props.isEditAvatarPopupOpen}
+                isOpen={props.isAddPlacePopupOpen}
+                onClose={props.onClose}
             />
 
             <PopupWithForm
@@ -78,13 +80,15 @@ function Main(props) {
                         <span id="image-avatar-error" className="popup__error"></span>
                     </>}
                 button='Сохранить'
-                isOpen={props.isAddPlacePopupOpen}
+                isOpen={props.isEditAvatarPopupOpen}
+                onClose={props.onClose}
             />
 
             <PopupWithForm
                 name='edit-confirm'
                 title='Вы уверены?'
                 button='Да'
+                onClose={props.onClose}
             />
 
         </>
