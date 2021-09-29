@@ -1,10 +1,9 @@
-import React from 'react';
 
-class Api extends React.Component {
-    constructor(config) {
-        this._address = config.address;
-        this._cohortId = config.cohortId;
-        this._headers = config.headers;
+class Api {
+    constructor({ address, cohortId, headers }) {
+        this._address = address;
+        this._cohortId = cohortId;
+        this._headers = headers;
     }
 
 
@@ -89,4 +88,13 @@ class Api extends React.Component {
     }
 }
 
-export default Api;
+const apiMesto = new Api({
+    address: `https://mesto.nomoreparties.co/v1`,
+    cohortId: `cohort-23`,
+    headers: {
+    authorization: `2f40adb1-d905-40eb-b5eb-fef99da08bb6`,
+    'Content-Type': 'application/json'
+    }
+})
+
+export default apiMesto;

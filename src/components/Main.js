@@ -1,19 +1,34 @@
-import profilePic from '../images/profile-image.jpg'
+import React from 'react'
 import PopupWithForm from './PopupWithForm.js'
+import apiMesto from '../utils/api'
 
 function Main(props) {
+
+    const [userName, setUserName] = React.useState('')
+    const [userDescription, setUserDescription] = React.useState('')
+    const [userAvatar, setUserAvatar] = React.useState()
+
+    React.useEffect(() => {
+        apiMesto.getUserInfo()
+        .then((data) => {
+            setUserName (data.name)
+            setUserDescription (data.about)
+            setUserAvatar (data.avatar)
+        })
+        .catch(err => console.log (`Getting user info: ${err}`))
+    }, [])
 
     return (
         <>
             <section className="profile">
                 <div className="profile__avatar">
-                    <img className="profile__avatar profile__avatar_image" src={profilePic} alt="Фото профиля" />
+                    <img className="profile__avatar profile__avatar_image" src={userAvatar} alt="Фото профиля" />
                     <button className="button profile__avatar profile__avatar_button" onClick={props.onEditAvatar}></button>
                 </div>
                 <div className="profile__info">
-                    <h1 className="profile__name">Жак-Ив-Кусто</h1>
+                    <h1 className="profile__name">{userName}</h1>
                     <button type="button" className="button profile__edit-button" aria-label="Редактировать" onClick={props.onEditProfile}></button>
-                    <p className="profile__description">Исследователь океана</p>
+                    <p className="profile__description">{userDescription}</p>
                 </div>
                 <button type="button" className="button profile__add-button" aria-label="Добавить" onClick={props.onAddPlace}></button>
             </section>
