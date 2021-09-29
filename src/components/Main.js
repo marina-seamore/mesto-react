@@ -1,21 +1,30 @@
 import React from 'react'
 import PopupWithForm from './PopupWithForm.js'
 import apiMesto from '../utils/api'
+import Card from './Card'
 
 function Main(props) {
 
     const [userName, setUserName] = React.useState('')
     const [userDescription, setUserDescription] = React.useState('')
     const [userAvatar, setUserAvatar] = React.useState()
+    const [cards, setCards] = React.useState([])
 
     React.useEffect(() => {
         apiMesto.getUserInfo()
-        .then((data) => {
-            setUserName (data.name)
-            setUserDescription (data.about)
-            setUserAvatar (data.avatar)
-        })
-        .catch(err => console.log (`Getting user info: ${err}`))
+            .then((data) => {
+                setUserName(data.name)
+                setUserDescription(data.about)
+                setUserAvatar(data.avatar)
+            })
+            .catch(err => console.log(`Getting user info: ${err}`))
+
+        apiMesto.getInitialCards()
+            .then((cardData) => {
+                setCards(cardData)
+                console.log([cards])
+            })
+            .catch(err => console.log(`Gettings cards: ${err}`))
     }, [])
 
     return (
@@ -35,21 +44,13 @@ function Main(props) {
 
             <section className="elements">
 
+                {cards.map((item) => (
+                    <Card card={item}
+                    key={item._id}
+                    />
+                ))}
+                
             </section>
-
-            <template className="element-template">
-                <article className="element">
-                    <button type="button" className="button element__delete-button"></button>
-                    <img className="element__photo" src="" alt="Фото" />
-                    <div className="element__name-block">
-                        <h2 className="element__name"></h2>
-                        <div className="element__likes">
-                            <button type="button" className="button element__likes_button" aria-label="нравится"></button>
-                            <p className="element__likes_counter"></p>
-                        </div>
-                    </div>
-                </article>
-            </template>
 
             <PopupWithForm
                 name='profile'
