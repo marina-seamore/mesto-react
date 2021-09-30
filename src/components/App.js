@@ -7,11 +7,17 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState(null)
+
+    const onCardClick = selectedCard => {
+        setSelectedCard(selectedCard)
+    }
 
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsAddPlacePopupOpen(false);
+        setSelectedCard(null)
     }
 
     function handleEditProfileClick() {
@@ -35,6 +41,8 @@ function App() {
                 isEditAvatarPopupOpen={isEditAvatarPopupOpen}
                 isAddPlacePopupOpen={isAddPlacePopupOpen}
                 onClose={closeAllPopups}
+                selectedCard={selectedCard}
+                onCardClick={onCardClick}
             />
             <Footer />
         </div>

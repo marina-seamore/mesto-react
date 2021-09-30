@@ -1,12 +1,14 @@
-function ImagePopup() {
+function ImagePopup({ card, onClose }) {
     return (
         <>
-        <section className="popup popup_full-photo">
+            <section className={`popup popup popup_full-photo ${card && 'popup_opened'}`}>
                 <div className="full-photo">
                     <button type="button" className="popup__close-button popup__close-button-full-photo"
-                        aria-label="закрыть"></button>
-                    <img className="full-photo__image" src="" alt="Большое и красивое фото" />
-                    <p className="full-photo__place"></p>
+                        aria-label="закрыть"
+                        onClick={onClose}
+                    ></button>
+                    <img className="full-photo__image" src={card ? card.link : ''} alt={card ? card.name : ''} />
+                    <p className="full-photo__place">{card ? card.name : ''}</p>
                 </div>
             </section>
         </>
