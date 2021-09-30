@@ -9,7 +9,7 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState(null)
 
-    function onCardClick(selectedCard) {
+    const onCardClick = selectedCard => {
         setSelectedCard(selectedCard)
     }
 
