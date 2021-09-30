@@ -2,6 +2,7 @@ import React from 'react'
 import PopupWithForm from './PopupWithForm.js'
 import apiMesto from '../utils/api'
 import Card from './Card'
+import ImagePopup from './ImagePopup.js'
 
 function Main(props) {
 
@@ -9,6 +10,7 @@ function Main(props) {
     const [userDescription, setUserDescription] = React.useState('')
     const [userAvatar, setUserAvatar] = React.useState()
     const [cards, setCards] = React.useState([])
+
 
     React.useEffect(() => {
         apiMesto.getUserInfo()
@@ -22,7 +24,6 @@ function Main(props) {
         apiMesto.getInitialCards()
             .then((cardData) => {
                 setCards(cardData)
-                console.log([cards])
             })
             .catch(err => console.log(`Gettings cards: ${err}`))
     }, [])
@@ -46,11 +47,17 @@ function Main(props) {
 
                 {cards.map((item) => (
                     <Card card={item}
-                    key={item._id}
+                        key={item._id}
+                        onCardClick={props.onCardClick}
                     />
                 ))}
-                
+
             </section>
+
+            <ImagePopup
+                card={props.selectedCard}
+                onClose={props.onClose}
+            />
 
             <PopupWithForm
                 name='profile'
@@ -106,6 +113,7 @@ function Main(props) {
                 button='Да'
                 onClose={props.onClose}
             />
+
 
         </>
     )
