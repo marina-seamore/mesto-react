@@ -1,14 +1,12 @@
 import React from 'react'
-import PopupWithForm from './PopupWithForm.js'
 import apiMesto from '../utils/api'
 import Card from './Card'
-import ImagePopup from './ImagePopup.js'
 
 function Main(props) {
 
     const [userName, setUserName] = React.useState('')
     const [userDescription, setUserDescription] = React.useState('')
-    const [userAvatar, setUserAvatar] = React.useState()
+    const [userAvatar, setUserAvatar] = React.useState('')
     const [cards, setCards] = React.useState([])
 
 
@@ -44,76 +42,13 @@ function Main(props) {
             </section>
 
             <section className="elements">
-
                 {cards.map((item) => (
                     <Card card={item}
                         key={item._id}
                         onCardClick={props.onCardClick}
                     />
                 ))}
-
             </section>
-
-            <ImagePopup
-                card={props.selectedCard}
-                onClose={props.onClose}
-            />
-
-            <PopupWithForm
-                name='profile'
-                title='Редактировать профиль'
-                children={
-                    <>
-                        <input type="text" className="popup__field popup__field_type_name" placeholder="Имя" name="name" id="name"
-                            value="" minLength="2" maxLength="40" required readOnly={true} />
-                        <span id="name-error" className="popup__error"></span>
-                        <input type="text" className="popup__field popup__field_type_description" placeholder="Вид деятельности"
-                            name="description" id="description" value="" minLength="2" maxLength="200" required readOnly={true} />
-                        <span id="description-error" className="popup__error"></span>
-                    </>}
-                button='Сохранить'
-                isOpen={props.isEditProfilePopupOpen}
-                onClose={props.onClose}
-            />
-
-            <PopupWithForm
-                name='photo'
-                title='Новое место'
-                children={
-                    <>
-                        <input type="text" className="popup__field popup__field_type_place" placeholder="Название" name="place"
-                            id="place" value="" minLength="2" maxLength="30" required readOnly={true} />
-                        <span id="place-error" className="popup__error"></span>
-                        <input type="url" className="popup__field popup__field_type_photo" name="imageLink" id="image" value=""
-                            placeholder="Ссылка на картинку" required readOnly={true} />
-                        <span id="image-error" className="popup__error"></span>
-                    </>}
-                button='Создать'
-                isOpen={props.isAddPlacePopupOpen}
-                onClose={props.onClose}
-            />
-
-            <PopupWithForm
-                name='edit-avatar'
-                title='Обновить аватар'
-                children={
-                    <>
-                        <input type="url" className="popup__field popup__field_type_photo" name="imageLink" id="image-avatar" value=""
-                            placeholder="Ссылка на картинку" required readOnly={true} />
-                        <span id="image-avatar-error" className="popup__error"></span>
-                    </>}
-                button='Сохранить'
-                isOpen={props.isEditAvatarPopupOpen}
-                onClose={props.onClose}
-            />
-
-            <PopupWithForm
-                name='edit-confirm'
-                title='Вы уверены?'
-                button='Да'
-                onClose={props.onClose}
-            />
-
 
         </>
     )
