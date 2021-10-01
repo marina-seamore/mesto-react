@@ -6,8 +6,8 @@ function ImagePopup({ card, onClose }) {
                     aria-label="закрыть"
                     onClick={onClose}
                 ></button>
-                <img className="full-photo__image" src={card ? card.link : ''} alt={card ? card.name : ''} />
-                <p className="full-photo__place">{card ? card.name : ''}</p>
+                <img className="full-photo__image" src={card?.link} alt={card?.name} />
+                <p className="full-photo__place">{card?.name}</p>
             </div>
         </section>
     )
