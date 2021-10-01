@@ -7,7 +7,7 @@ function Card({ onCardClick, card }) {
     return (
         <article className="element">
             <button type="button" className="button element__delete-button"></button>
-            <img className="element__photo" src={card.link} alt="Фото" onClick={handleCardClick} />
+            <img className="element__photo" src={card.link} alt={card.name} onClick={handleCardClick} />
             <div className="element__name-block">
                 <h2 className="element__name">{card.name}</h2>
                 <div className="element__likes">
