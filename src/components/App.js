@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js'
 import apiMesto from '../utils/api'
 import { CurrectUserContext } from '../contexts/CurrentUserContext.js';
+import EditProfilePopup from './EditProfilePopup.js';
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -59,20 +60,10 @@ function App() {
                     onClose={closeAllPopups}
                 />
 
-                <PopupWithForm
-                    name='profile'
-                    title='Редактировать профиль'
-                    button='Сохранить'
+                <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
-                >
-                    <input type="text" className="popup__field popup__field_type_name" placeholder="Имя" name="name" id="name"
-                        value="" minLength="2" maxLength="40" required readOnly={true} />
-                    <span id="name-error" className="popup__error"></span>
-                    <input type="text" className="popup__field popup__field_type_description" placeholder="Вид деятельности"
-                        name="description" id="description" value="" minLength="2" maxLength="200" required readOnly={true} />
-                    <span id="description-error" className="popup__error"></span>
-                </PopupWithForm>
+                />
 
                 <PopupWithForm
                     name='photo'
