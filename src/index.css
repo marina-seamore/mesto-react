@@ -18,7 +18,8 @@
 @import url(./blocks/element/__likes/_button/_active/element__likes_button_active.css);
 @import url(./blocks/element/__likes/_counter/element__likes_counter.css);
 @import url(./blocks/element/__name-block/element__name-block.css);
-@import url(./blocks/element/__delete-button/element__delete-button.css);
+@import url(./blocks/element/__delete-button/element__delete-button_visible.css);
+@import url(./blocks/element/__delete-button/element__delete-button_hidden.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__logo/footer__logo.css);
 @import url(./blocks/popup/popup.css);
