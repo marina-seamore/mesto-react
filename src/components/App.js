@@ -105,6 +105,15 @@ function App() {
             .catch(err => console.log(`Deleting card: ${err}`))
     }
 
+    function handleAddPlace(placeInfo) {
+        apiMesto.addCard(placeInfo)
+            .then((newCard) => {
+                setCards([...cards, newCard])
+                closeAllPopups()
+            })
+            .catch(err => console.log(`Adding Place: ${err}`))
+    }
+
     return (
         <CurrectUserContext.Provider value={currentUser}>
             <div className="page">
@@ -132,6 +141,7 @@ function App() {
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
+                    onAddPlace={handleAddPlace}
                 />
 
                 <EditAvatarPopup
