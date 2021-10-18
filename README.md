@@ -24,3 +24,12 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Further steps
+### Fix:
+1. Delete created cards
+2. Like/dislike works once, requires manual reload
+
+### Kinda feats:
+1. Close popups by Esc and a click outside the popup
+2. Before deleting a card, a popup with delete confirmation pops up
+3. Form validates and shows error as one types, not after submit
