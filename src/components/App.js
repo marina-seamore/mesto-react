@@ -8,6 +8,7 @@ import apiMesto from '../utils/api'
 import { CurrectUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 
 function App() {
 
@@ -128,20 +129,10 @@ function App() {
                     onUpdateUser={handleUpdateUser}
                 />
 
-                <PopupWithForm
-                    name='photo'
-                    title='Новое место'
-                    button='Создать'
+                <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
-                >
-                    <input type="text" className="popup__field popup__field_type_place" placeholder="Название" name="place"
-                        id="place" value="" minLength="2" maxLength="30" required readOnly={true} />
-                    <span id="place-error" className="popup__error"></span>
-                    <input type="url" className="popup__field popup__field_type_photo" name="imageLink" id="image" value=""
-                        placeholder="Ссылка на картинку" required readOnly={true} />
-                    <span id="image-error" className="popup__error"></span>
-                </PopupWithForm>
+                />
 
                 <EditAvatarPopup
                     isOpen={isEditAvatarPopupOpen}
