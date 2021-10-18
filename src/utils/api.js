@@ -39,7 +39,7 @@ class Api {
             .then(this.returnResultStatus)
     }
 
-    setUserAvatar({ avatar }) {
+    setUserAvatar( avatar ) {
         return fetch(`${this._address}/${this._cohortId}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
