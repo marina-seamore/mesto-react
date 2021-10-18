@@ -26,7 +26,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Further steps
 ### Fix:
-1. Add ability to delete created cards
+1. Add the ability to delete created cards
 2. Proper like/dislike function: for now works once, requires manual reload
 
 ### Kinda feats:
