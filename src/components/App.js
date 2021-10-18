@@ -10,24 +10,12 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 
 function App() {
+
+    //popups
+
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState(null)
-
-    const [currentUser, setCurrentUser] = React.useState('')
-
-    React.useEffect(() => {
-        apiMesto.getUserInfo()
-            .then((userData) => {
-                setCurrentUser(userData)
-            })
-            .catch(err => console.log(`Getting user info: ${err}`))
-    }, [])
-
-    function onCardClick(selectedCard) {
-        setSelectedCard(selectedCard)
-    }
 
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false);
@@ -46,6 +34,20 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    //User info
+
+    const [currentUser, setCurrentUser] = React.useState('')
+
+    React.useEffect(() => {
+        apiMesto.getUserInfo()
+            .then((userData) => {
+                setCurrentUser(userData)
+            })
+            .catch(err => console.log(`Getting user info: ${err}`))
+    }, [])
+
+    // User info updates
+
     function handleUpdateUser(newUserInfo) {
         apiMesto.setUserInfo(newUserInfo)
             .then((newData) => {
@@ -57,11 +59,49 @@ function App() {
 
     function handleUpdateAvatar(newUserInfo) {
         apiMesto.setUserAvatar(newUserInfo.avatar)
-        .then((newAvatar) => {
-            setCurrentUser(newAvatar)
-            closeAllPopups()
-        })
-        .catch(err => console.log(`Updating avatar: ${err}`))
+            .then((newAvatar) => {
+                setCurrentUser(newAvatar)
+                closeAllPopups()
+            })
+            .catch(err => console.log(`Updating avatar: ${err}`))
+    }
+
+    // сards
+
+    const [selectedCard, setSelectedCard] = React.useState(null)
+    const [cards, setCards] = React.useState([])
+
+
+    React.useEffect(() => {
+
+        apiMesto.getInitialCards()
+            .then((cardData) => {
+                setCards(cardData)
+            })
+            .catch(err => console.log(`Gettings cards: ${err}`))
+    }, [])
+
+    function onCardClick(selectedCard) {
+        setSelectedCard(selectedCard)
+    }
+
+    function handleCardLike(card) {
+        const isLiked = card.likes.some(i => i._id === currentUser._id)
+        isLiked ? apiMesto.removeLike(card._id) : apiMesto.addLike(card._id)
+            .then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+            })
+            .catch(err => console.log(`Like function error: ${err}`))
+    }
+
+    const [cardToDelete, setCardToDelete] = React.useState(null)
+    function handleCardDelete(card) {
+        setCardToDelete(card)
+        apiMesto.deleteCard(cardToDelete._id)
+            .then(() => {
+                setCards((state) => state.filter((c) => c._id !== cardToDelete._id))
+            })
+            .catch(err => console.log(`Deleting card: ${err}`))
     }
 
     return (
@@ -73,6 +113,9 @@ function App() {
                     onEditAvatar={handleEditAvatarClick}
                     onAddPlace={handleAddPlaceClick}
                     onCardClick={onCardClick}
+                    cards={cards}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
                 />
                 <ImagePopup
                     card={selectedCard}

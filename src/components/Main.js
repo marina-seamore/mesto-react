@@ -1,43 +1,10 @@
 import React from 'react'
-import apiMesto from '../utils/api'
 import Card from './Card'
 import { CurrectUserContext } from '../contexts/CurrentUserContext'
 
 function Main(props) {
 
     const currentUser = React.useContext(CurrectUserContext)
-
-    const [cards, setCards] = React.useState([])
-
-
-    React.useEffect(() => {
-
-        apiMesto.getInitialCards()
-            .then((cardData) => {
-                setCards(cardData)
-            })
-            .catch(err => console.log(`Gettings cards: ${err}`))
-    }, [])
-
-
-    function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id)
-        isLiked ? apiMesto.removeLike(card._id) : apiMesto.addLike(card._id)
-            .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-            })
-            .catch(err => console.log(`Like function error: ${err}`))
-    }
-
-    const [cardToDelete, setCardToDelete] = React.useState(null)
-    function handleCardDelete(card) {
-        setCardToDelete(card)
-        apiMesto.deleteCard(cardToDelete._id)
-        .then(() => {
-            setCards((state) => state.filter((c) => c._id !== cardToDelete._id))
-        })
-        .catch(err => console.log(`Deleting card: ${err}`))
-    }
 
     return (
         <>
@@ -55,12 +22,12 @@ function Main(props) {
             </section>
 
             <section className="elements">
-                {cards.map((item) => (
+                {props.cards.map((item) => (
                     <Card card={item}
                         key={item._id}
                         onCardClick={props.onCardClick}
-                        onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
+                        onCardLike={props.onCardLike}
+                        onCardDelete={props.onCardDelete}
                     />
                 ))}
             </section>
