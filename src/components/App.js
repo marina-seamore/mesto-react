@@ -45,6 +45,15 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
+    function handleUpdateUser(newUserInfo) {
+        apiMesto.setUserInfo(newUserInfo)
+            .then((newData) => {
+                setCurrentUser(newData)
+                closeAllPopups()
+            })
+            .catch(err => console.log(`Updating UserInfo: ${err}`))
+    }
+
     return (
         <CurrectUserContext.Provider value={currentUser}>
             <div className="page">
@@ -63,6 +72,7 @@ function App() {
                 <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
+                    onUpdateUser={handleUpdateUser}
                 />
 
                 <PopupWithForm
