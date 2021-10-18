@@ -108,7 +108,7 @@ function App() {
     function handleAddPlace(placeInfo) {
         apiMesto.addCard(placeInfo)
             .then((newCard) => {
-                setCards([...cards, newCard])
+                setCards([newCard, ...cards])
                 closeAllPopups()
             })
             .catch(err => console.log(`Adding Place: ${err}`))
