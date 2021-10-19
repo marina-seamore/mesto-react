@@ -67,7 +67,7 @@ function App() {
             .catch(err => console.log(`Updating avatar: ${err}`))
     }
 
-    // сards
+    // CARDS
 
     const [selectedCard, setSelectedCard] = React.useState(null)
     const [cards, setCards] = React.useState([])
@@ -88,19 +88,30 @@ function App() {
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id)
-        isLiked ? apiMesto.removeLike(card._id) : apiMesto.addLike(card._id)
-            .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-            })
-            .catch(err => console.log(`Like function error: ${err}`))
+        if (!isLiked) {
+            apiMesto.addLike(card._id)
+                .then((newCard) => {
+                    const newCards = cards.map((c) => c._id === card._id ? newCard : c)
+                    setCards(newCards)
+                })
+                .catch(err => console.log(`Like function error: ${err}`))
+        } else {
+            apiMesto.removeLike(card._id)
+                .then((newCard) => {
+                    const newCards = cards.map((c) => c._id === card._id ? newCard : c)
+                    setCards(newCards)
+                })
+                .catch(err => console.log(`Dislike function error: ${err}`))
+        }
+
     }
 
-    const [cardToDelete, setCardToDelete] = React.useState(null)
+
     function handleCardDelete(card) {
-        setCardToDelete(card)
-        apiMesto.deleteCard(cardToDelete._id)
-            .then(() => {
-                setCards((state) => state.filter((c) => c._id !== cardToDelete._id))
+        apiMesto.deleteCard(card._id)
+            .then((deletedCard) => {
+                const newCards = cards.filter((c) => c._id !== deletedCard._id)
+                setCards(newCards)
             })
             .catch(err => console.log(`Deleting card: ${err}`))
     }
@@ -118,6 +129,7 @@ function App() {
         <CurrectUserContext.Provider value={currentUser}>
             <div className="page">
                 <Header />
+
                 <Main
                     onEditProfile={handleEditProfileClick}
                     onEditAvatar={handleEditAvatarClick}
@@ -127,6 +139,7 @@ function App() {
                     onCardLike={handleCardLike}
                     onCardDelete={handleCardDelete}
                 />
+
                 <ImagePopup
                     card={selectedCard}
                     onClose={closeAllPopups}
@@ -150,13 +163,13 @@ function App() {
                     onUpdateAvatar={handleUpdateAvatar}
                 />
 
-
                 <PopupWithForm
                     name='edit-confirm'
                     title='Вы уверены?'
                     button='Да'
                     onClose={closeAllPopups}
                 />
+
                 <Footer />
             </div>
         </CurrectUserContext.Provider>
