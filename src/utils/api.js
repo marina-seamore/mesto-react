@@ -7,7 +7,7 @@ class Api {
     }
 
 
-    returnResultStatus(res) {
+    _returnResultStatus(res) {
         if (res.ok) {
             return res.json();
         } return Promise.reject(`Не получилось: ${res.status}${res.statusText}`);
@@ -17,14 +17,14 @@ class Api {
         return fetch(`${this._address}/${this._cohortId}/cards`, {
             headers: this._headers
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     getUserInfo() {
         return fetch(`${this._address}/${this._cohortId}/users/me`, {
             headers: this._headers
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     setUserInfo({ name, about }) {
@@ -36,7 +36,7 @@ class Api {
                 about: about
             })
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     setUserAvatar( avatar ) {
@@ -47,7 +47,7 @@ class Api {
                 avatar: avatar
             })
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
 
@@ -60,7 +60,7 @@ class Api {
                 link
             })
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     deleteCard(cardId) {
@@ -68,7 +68,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     addLike(cardId) {
@@ -76,7 +76,7 @@ class Api {
             method: 'PUT',
             headers: this._headers
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 
     removeLike(cardId) {
@@ -84,7 +84,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(this.returnResultStatus)
+            .then(this._returnResultStatus)
     }
 }
 
