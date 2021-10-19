@@ -91,14 +91,14 @@ function App() {
         if (!isLiked) {
             apiMesto.addLike(card._id)
                 .then((newCard) => {
-                    const newCards = cards.map((c) => c._id === card._id ? newCard : c)
+                    const newCards = cards.map(c => c._id === card._id ? newCard : c)
                     setCards(newCards)
                 })
                 .catch(err => console.log(`Like function error: ${err}`))
         } else {
             apiMesto.removeLike(card._id)
                 .then((newCard) => {
-                    const newCards = cards.map((c) => c._id === card._id ? newCard : c)
+                    const newCards = cards.map(c => c._id === card._id ? newCard : c)
                     setCards(newCards)
                 })
                 .catch(err => console.log(`Dislike function error: ${err}`))
@@ -109,12 +109,14 @@ function App() {
 
     function handleCardDelete(card) {
         apiMesto.deleteCard(card._id)
-            .then((deletedCard) => {
-                const newCards = cards.filter((c) => c._id !== deletedCard._id)
+            .then(() => {
+                const newCards = cards.filter(c => c._id !== card._id)
                 setCards(newCards)
             })
             .catch(err => console.log(`Deleting card: ${err}`))
     }
+
+
 
     function handleAddPlace(placeInfo) {
         apiMesto.addCard(placeInfo)
