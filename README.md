@@ -29,3 +29,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 1. Close popups by Esc and a click outside the popup
 2. Before deleting a card, a popup with delete confirmation pops up
 3. Form validates and shows error as one types, not after submit
+4. When the request is being processed, a corresponding message appears to inform about that
