@@ -16,10 +16,12 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isDeleteCardPopupOpen, setisDeleteCardPopupOpen] = React.useState(false);
 
     // cards
     const [selectedCard, setSelectedCard] = React.useState(null)
     const [cards, setCards] = React.useState([])
+    const [cardToDelete, setCardToDelete] = React.useState(null)
 
     //User info
     const [currentUser, setCurrentUser] = React.useState('')
@@ -30,6 +32,7 @@ function App() {
         setIsEditProfilePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsAddPlacePopupOpen(false);
+        setisDeleteCardPopupOpen(false)
         setSelectedCard(null)
     }
 
@@ -107,12 +110,20 @@ function App() {
 
     }
 
+    function setCardToBeDeleted(cardToDelete) {
+        setCardToDelete(cardToDelete)
+        setisDeleteCardPopupOpen(true)
+        console.log(cardToDelete._id)
+    }
 
-    function handleCardDelete(card) {
-        apiMesto.deleteCard(card._id)
+
+    function handleCardDelete(e) {
+        e.preventDefault();
+        apiMesto.deleteCard(cardToDelete._id)
             .then(() => {
-                const newCards = cards.filter(c => c._id !== card._id)
+                const newCards = cards.filter(c => c._id !== cardToDelete._id)
                 setCards(newCards)
+                setisDeleteCardPopupOpen(false)
             })
             .catch(err => console.log(`Deleting card: ${err}`))
     }
@@ -140,7 +151,7 @@ function App() {
                     onCardClick={onCardClick}
                     cards={cards}
                     onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
+                    onCardDelete={setCardToBeDeleted}
                 />
 
                 <ImagePopup
@@ -168,6 +179,8 @@ function App() {
 
                 <DeleteCardPopup
                     onClose={closeAllPopups}
+                    isOpen={isDeleteCardPopupOpen}
+                    onSubmit={handleCardDelete}
                 />
 
                 <Footer />
