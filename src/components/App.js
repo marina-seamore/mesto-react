@@ -2,22 +2,30 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js'
 import apiMesto from '../utils/api'
 import { CurrectUserContext } from '../contexts/CurrentUserContext.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
+import DeleteCardPopup from './DeleteCardPopup.js';
 
 function App() {
 
     //popups
-
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
+    // cards
+    const [selectedCard, setSelectedCard] = React.useState(null)
+    const [cards, setCards] = React.useState([])
+
+    //User info
+    const [currentUser, setCurrentUser] = React.useState('')
+
+
+    //popups functions
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
@@ -35,10 +43,8 @@ function App() {
         setIsAddPlacePopupOpen(true);
     }
 
-    //User info
 
-    const [currentUser, setCurrentUser] = React.useState('')
-
+    // User info functions
     React.useEffect(() => {
         apiMesto.getUserInfo()
             .then((userData) => {
@@ -47,7 +53,6 @@ function App() {
             .catch(err => console.log(`Getting user info: ${err}`))
     }, [])
 
-    // User info updates
 
     function handleUpdateUser(newUserInfo) {
         apiMesto.setUserInfo(newUserInfo)
@@ -67,11 +72,7 @@ function App() {
             .catch(err => console.log(`Updating avatar: ${err}`))
     }
 
-    // CARDS
-
-    const [selectedCard, setSelectedCard] = React.useState(null)
-    const [cards, setCards] = React.useState([])
-
+    //cards functions
 
     React.useEffect(() => {
 
@@ -117,7 +118,6 @@ function App() {
     }
 
 
-
     function handleAddPlace(placeInfo) {
         apiMesto.addCard(placeInfo)
             .then((newCard) => {
@@ -126,6 +126,7 @@ function App() {
             })
             .catch(err => console.log(`Adding Place: ${err}`))
     }
+
 
     return (
         <CurrectUserContext.Provider value={currentUser}>
@@ -165,10 +166,7 @@ function App() {
                     onUpdateAvatar={handleUpdateAvatar}
                 />
 
-                <PopupWithForm
-                    name='edit-confirm'
-                    title='Вы уверены?'
-                    button='Да'
+                <DeleteCardPopup
                     onClose={closeAllPopups}
                 />
 
