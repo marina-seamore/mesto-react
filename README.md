@@ -28,3 +28,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Add kinda feats:
 1. Form validates and shows error as one types, not after submit
 2. When the request is being processed, a corresponding message appears to inform about that
+3. Smooth image popup closure
+4. Make all card name fields the same size
